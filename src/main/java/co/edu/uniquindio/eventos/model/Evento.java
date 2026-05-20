@@ -47,6 +47,14 @@ public class Evento {
         estado = EstadoEvento.FINALIZADO;
     }
 
+    public void actualizarDatos(String nombre, String categoria, String descripcion, String ciudad, LocalDateTime fechaHora) {
+        this.nombre = nombre;
+        this.categoria = categoria;
+        this.descripcion = descripcion;
+        this.ciudad = ciudad;
+        this.fechaHora = fechaHora;
+    }
+
     public List<Zona> consultarDisponibilidad() {
         return recinto.getZonas();
     }
@@ -96,6 +104,10 @@ public class Evento {
 
     public Recinto getRecinto() {
         return recinto;
+    }
+
+    public void asignarRecinto(Recinto recinto) {
+        this.recinto = recinto;
     }
 
     @Override

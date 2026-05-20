@@ -5,12 +5,16 @@ import java.util.Map;
 
 public class PanelMetricas {
     private double totalVentas;
+    private double ingresosServicios;
+    private double tasaCancelacion;
     private int cantidadCompras;
     private int cantidadEventosPublicados;
     private Map<String, Double> ocupacionPorZona;
+    private Map<String, Double> ventasPorEvento;
 
     public PanelMetricas() {
         this.ocupacionPorZona = new LinkedHashMap<>();
+        this.ventasPorEvento = new LinkedHashMap<>();
     }
 
     public double getTotalVentas() {
@@ -19,6 +23,22 @@ public class PanelMetricas {
 
     public void setTotalVentas(double totalVentas) {
         this.totalVentas = totalVentas;
+    }
+
+    public double getIngresosServicios() {
+        return ingresosServicios;
+    }
+
+    public void setIngresosServicios(double ingresosServicios) {
+        this.ingresosServicios = ingresosServicios;
+    }
+
+    public double getTasaCancelacion() {
+        return tasaCancelacion;
+    }
+
+    public void setTasaCancelacion(double tasaCancelacion) {
+        this.tasaCancelacion = tasaCancelacion;
     }
 
     public int getCantidadCompras() {
@@ -39,5 +59,9 @@ public class PanelMetricas {
 
     public Map<String, Double> getOcupacionPorZona() {
         return ocupacionPorZona;
+    }
+
+    public Map<String, Double> getVentasPorEvento() {
+        return ventasPorEvento;
     }
 }

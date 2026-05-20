@@ -51,9 +51,9 @@ public class DatosPrueba {
     }
 
     private void cargar() {
-        Usuario u1 = new Usuario("U01", "Mariana Rodriguez", "mariana@uq.edu.co", "3001234567");
-        Usuario u2 = new Usuario("U02", "Sofia Aviles", "sofia@uq.edu.co", "3014567890");
-        Usuario u3 = new Usuario("U03", "Juan Tellez", "juan@uq.edu.co", "3021112233");
+        Usuario u1 = new Usuario("U01", "Mariana Rodriguez", "mariana@eventosuq.com", "3001234567", "1234");
+        Usuario u2 = new Usuario("U02", "Sofia Aviles", "sofia@eventosuq.com", "3014567890", "1234");
+        Usuario u3 = new Usuario("U03", "Juan Tellez", "juan@eventosuq.com", "3021112233", "1234");
         u1.agregarMetodoPago(new PagoTarjeta());
         u1.agregarMetodoPago(new PagoNequi());
         u2.agregarMetodoPago(new PagoPSE());
@@ -62,29 +62,28 @@ public class DatosPrueba {
         usuarios.add(u2);
         usuarios.add(u3);
 
-        administrador = new Administrador("A01", "Admin Eventos", "admin@uq.edu.co", "3000000000", "EMP-2026");
-
-        Recinto coliseo = new Recinto("R01", "Coliseo UQ", "Cra 15 #12N", "Armenia");
-        Recinto teatro = new Recinto("R02", "Teatro Quindio", "Av Bolivar #20N", "Armenia");
-
-        crearZonas(coliseo);
-        crearZonas(teatro);
+        administrador = new Administrador("A01", "Admin Eventos", "admin@eventosuq.com", "3000000000", "admin123", "EMP-2026");
 
         eventos.add(EventoFactory.crearEvento("E01", "Noche de Rock", "Concierto",
                 "Concierto universitario con bandas locales.", "Armenia",
-                LocalDateTime.now().plusDays(4).withHour(19).withMinute(30), coliseo));
+                LocalDateTime.now().plusDays(4).withHour(19).withMinute(30),
+                crearRecintoConAsientos("R01-E01", "Coliseo UQ", "Cra 15 #12N", "Armenia")));
         eventos.add(EventoFactory.crearEvento("E02", "Festival de Danza", "Festival",
                 "Presentaciones de grupos juveniles y academias.", "Armenia",
-                LocalDateTime.now().plusDays(6).withHour(18).withMinute(0), coliseo));
+                LocalDateTime.now().plusDays(6).withHour(18).withMinute(0),
+                crearRecintoConAsientos("R01-E02", "Coliseo UQ", "Cra 15 #12N", "Armenia")));
         eventos.add(EventoFactory.crearEvento("E03", "Obra La Casa", "Teatro",
                 "Obra corta de drama y humor para publico general.", "Armenia",
-                LocalDateTime.now().plusDays(8).withHour(20).withMinute(0), teatro));
+                LocalDateTime.now().plusDays(8).withHour(20).withMinute(0),
+                crearRecintoConAsientos("R02-E03", "Teatro Quindio", "Av Bolivar #20N", "Armenia")));
         eventos.add(EventoFactory.crearEvento("E04", "Stand Up PGII", "Comedia",
                 "Noche de comedia estudiantil.", "Pereira",
-                LocalDateTime.now().plusDays(10).withHour(19).withMinute(0), teatro));
+                LocalDateTime.now().plusDays(10).withHour(19).withMinute(0),
+                crearRecintoConAsientos("R02-E04", "Teatro Quindio", "Av Bolivar #20N", "Pereira")));
         eventos.add(EventoFactory.crearEvento("E05", "Muestra Coral", "Cultural",
                 "Encuentro coral con invitados regionales.", "Manizales",
-                LocalDateTime.now().plusDays(12).withHour(17).withMinute(30), coliseo));
+                LocalDateTime.now().plusDays(12).withHour(17).withMinute(30),
+                crearRecintoConAsientos("R01-E05", "Coliseo UQ", "Cra 15 #12N", "Manizales")));
         eventos.get(3).publicar();
         eventos.get(4).publicar();
 
@@ -113,16 +112,18 @@ public class DatosPrueba {
         incidencias.add(new Incidencia("INC-002", "Cambio de horario", "Revisar actualizacion del evento cultural", eventos.get(4).getNombre()));
     }
 
-    private void crearZonas(Recinto recinto) {
-        Zona vip = new Zona(recinto.getIdRecinto() + "-Z1", "VIP", 6, 95000);
-        Zona preferencial = new Zona(recinto.getIdRecinto() + "-Z2", "Preferencial", 8, 70000);
-        Zona general = new Zona(recinto.getIdRecinto() + "-Z3", "General", 10, 45000);
-        llenarAsientos(vip, "A", 6);
-        llenarAsientos(preferencial, "B", 8);
-        llenarAsientos(general, "C", 10);
+    private Recinto crearRecintoConAsientos(String idRecinto, String nombre, String direccion, String ciudad) {
+        Recinto recinto = new Recinto(idRecinto, nombre, direccion, ciudad);
+        Zona vip = new Zona(recinto.getIdRecinto() + "-Z1", "VIP", 12, 95000);
+        Zona preferencial = new Zona(recinto.getIdRecinto() + "-Z2", "Preferencial", 12, 70000);
+        Zona general = new Zona(recinto.getIdRecinto() + "-Z3", "General", 24, 45000);
+        llenarAsientos(vip, "A", 12);
+        llenarAsientos(preferencial, "B", 12);
+        llenarAsientos(general, "C", 24);
         recinto.agregarZona(vip);
         recinto.agregarZona(preferencial);
         recinto.agregarZona(general);
+        return recinto;
     }
 
     private void llenarAsientos(Zona zona, String fila, int total) {

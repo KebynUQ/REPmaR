@@ -18,6 +18,7 @@ public class Compra {
     private EstadoCompra estado;
     private List<Entrada> entradas;
     private List<ServicioAdicional> servicios;
+    private double descuentoPromocional;
     private Pago pago;
     private EstadoCompraInterface estadoCompraActual;
 
@@ -28,6 +29,7 @@ public class Compra {
         this.fechaCreacion = LocalDateTime.now();
         this.entradas = new ArrayList<>();
         this.servicios = new ArrayList<>();
+        this.descuentoPromocional = 0;
         this.estadoCompraActual = new EstadoCreada();
         this.estado = EstadoCompra.CREADA;
         this.total = 0;
@@ -51,8 +53,16 @@ public class Compra {
     public double calcularTotal() {
         double totalEntradas = entradas.stream().mapToDouble(Entrada::getPrecioFinal).sum();
         double totalServicios = servicios.stream().mapToDouble(ServicioAdicional::getCosto).sum();
-        total = totalEntradas + totalServicios;
+        total = totalEntradas + totalServicios - descuentoPromocional;
+        if (total < 0) {
+            total = 0;
+        }
         return total;
+    }
+
+    public void aplicarDescuentoPromocional(double descuento) {
+        this.descuentoPromocional = Math.max(descuento, 0);
+        calcularTotal();
     }
 
     public boolean pagar(Pago pago) {
@@ -124,6 +134,10 @@ public class Compra {
 
     public List<ServicioAdicional> getServicios() {
         return servicios;
+    }
+
+    public double getDescuentoPromocional() {
+        return descuentoPromocional;
     }
 
     public Pago getPago() {

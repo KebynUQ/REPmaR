@@ -19,7 +19,10 @@
                 <Button mnemonicParsing="false" onAction="#mostrarCartelera" styleClass="menu-button" text="Cartelera" />
                 <Button mnemonicParsing="false" onAction="#mostrarServicios" styleClass="menu-button" text="Servicios" />
                 <Button mnemonicParsing="false" onAction="#mostrarPromociones" styleClass="menu-button" text="Promociones" />
-                <Button mnemonicParsing="false" onAction="#mostrarAdmin" styleClass="menu-button" text="Admin" />
+                <Button mnemonicParsing="false" onAction="#mostrarPerfil" styleClass="menu-button" text="Mi perfil" />
+                <Button mnemonicParsing="false" onAction="#mostrarHistorial" styleClass="menu-button" text="Historial" />
+                <Button fx:id="adminButton" mnemonicParsing="false" onAction="#mostrarAdmin" styleClass="menu-button" text="Admin" />
+                <Button mnemonicParsing="false" onAction="#cerrarSesion" styleClass="menu-button" text="Cerrar sesion" />
                 <Label fx:id="usuarioLabel" styleClass="user-label" text="Usuario" />
             </HBox>
             <HBox styleClass="hero-bar">

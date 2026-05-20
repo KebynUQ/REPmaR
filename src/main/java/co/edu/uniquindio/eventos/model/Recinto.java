@@ -30,6 +30,12 @@ public class Recinto {
         return zonas;
     }
 
+    public void actualizarDatos(String nombre, String direccion, String ciudad) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.ciudad = ciudad;
+    }
+
     public String getIdRecinto() {
         return idRecinto;
     }

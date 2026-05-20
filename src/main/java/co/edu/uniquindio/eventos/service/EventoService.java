@@ -4,6 +4,7 @@ import co.edu.uniquindio.eventos.model.Evento;
 import co.edu.uniquindio.eventos.model.enums.EstadoEvento;
 import co.edu.uniquindio.eventos.repository.DatosPrueba;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +31,34 @@ public class EventoService {
                 .toList();
     }
 
+    public List<Evento> filtrarPorFecha(LocalDateTime desde, LocalDateTime hasta) {
+        return listarEventos().stream()
+                .filter(evento -> !evento.getFechaHora().isBefore(desde) && !evento.getFechaHora().isAfter(hasta))
+                .toList();
+    }
+
+    public List<Evento> filtrarPorPrecioMaximo(double precioMaximo) {
+        return listarEventos().stream()
+                .filter(evento -> evento.getPrecioDesde() <= precioMaximo)
+                .toList();
+    }
+
     public void agregarEvento(Evento evento) {
         DatosPrueba.getInstancia().getEventos().add(evento);
+    }
+
+    public void actualizarEvento(Evento eventoActualizado) {
+        List<Evento> eventos = DatosPrueba.getInstancia().getEventos();
+        for (int i = 0; i < eventos.size(); i++) {
+            if (eventos.get(i).getIdEvento().equals(eventoActualizado.getIdEvento())) {
+                eventos.set(i, eventoActualizado);
+                return;
+            }
+        }
+    }
+
+    public void eliminarEvento(String idEvento) {
+        DatosPrueba.getInstancia().getEventos().removeIf(evento -> evento.getIdEvento().equals(idEvento));
     }
 
     public void publicarEvento(Evento evento) {

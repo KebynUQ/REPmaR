@@ -1,129 +1,96 @@
-# PlataformaEventosPGII
+# Plataforma de Gestion de Eventos y Venta de Entradas (PGII)
 
-Proyecto Java de Programacion II construido con `Java 17`, `JavaFX` y `Maven`.  
-Simula una plataforma de gestion de eventos y venta de entradas con datos en memoria, pensada para ser entendible por estudiantes de tercer semestre.
+Proyecto academico de Programacion II (tercer semestre) construido con Java, JavaFX y Maven.
+La aplicacion permite gestionar eventos, seleccionar asientos por zonas, comprar entradas con pago simulado y administrar operaciones basicas.
 
-## Descripcion
+## Ejecucion
 
-La aplicacion permite:
+1. Compilar:
+`mvn clean compile`
 
-- Ver eventos disponibles en una cartelera.
-- Consultar detalle del evento, recinto, zonas y asientos.
-- Crear una compra sencilla.
-- Agregar servicios adicionales.
-- Pagar de forma simulada.
-- Confirmar la compra y ver un comprobante.
-- Entrar a un modo administrador para gestionar eventos, asientos, incidencias y metricas basicas.
+2. Ejecutar JavaFX:
+`mvn clean javafx:run`
 
-## Tecnologias
+3. Ejecutar pruebas:
+`mvn test`
 
-- Java 17
-- JavaFX
-- Maven
-- Datos en memoria con `ArrayList`
-
-## Estructura principal
-
-```text
-src/main/java/co/edu/uniquindio/eventos/
-├── app
-├── Navigator.java
-├── controller
-├── model
-├── model/enums
-├── patterns/behavioral
-├── patterns/creational
-├── patterns/structural
-├── repository
-├── service
-└── util
-```
-
-## Patrones implementados
-
-- `Singleton`: `GestorReservas`
-- `Factory Method`: `EventoFactory`
-- `Builder`: `ReservaBuilder`
-- `Decorator`: `ServicioBase`, `ServicioDecorator`, `ServicioVIP`, `SeguroCancelacion`, `Parqueadero`
-- `Facade`: `CompraFacade`
-- `Adapter`: `ReporteExternoAdapter`
-- `Strategy`: `MetodoPago`, `PagoTarjeta`, `PagoPSE`, `PagoNequi`
-- `Observer`: `Notificador`, `Observador`, `NotificacionUsuario`, `NotificacionAdministrador`
-- `State`: `EstadoCompraInterface` y sus estados concretos
-
-Las clases de patrones tienen comentarios cortos para sustentacion, por ejemplo:
-
-- `// Patron Singleton aplicado para controlar reservas`
-- `// Patron Strategy aplicado para cambiar metodo de pago`
-- `// Patron Decorator aplicado para agregar servicios adicionales`
+Nota: en este entorno no estuvo disponible el comando `mvn`, por lo tanto la verificacion de compilacion/ejecucion se hizo por revision de codigo.
 
 ## Usuarios de prueba
 
-- Usuario 1: `Mariana Rodriguez` - `mariana@uq.edu.co`
-- Usuario 2: `Sofia Aviles` - `sofia@uq.edu.co`
-- Usuario 3: `Juan Tellez` - `juan@uq.edu.co`
-- Administrador: `Admin Eventos` - `admin@uq.edu.co`
+- Usuario 1: Mariana Rodriguez (`mariana@uq.edu.co`)
+- Usuario 2: Sofia Aviles (`sofia@uq.edu.co`)
+- Usuario 3: Juan Tellez (`juan@uq.edu.co`)
+- Administrador: Admin Eventos (`admin@uq.edu.co`)
 
-La aplicacion inicia con el primer usuario de prueba como usuario simulado.
+## Funcionalidades principales
 
-## Datos de prueba cargados automaticamente
+- Cartelera de eventos publicados.
+- Login y registro en memoria (sin base de datos) con sesion por rol.
+- Mi perfil (ver y editar nombre, correo y telefono).
+- Historial de compras con filtros por evento/estado/fecha.
+- Detalle de evento con mapa visual de zonas y asientos.
+- Seleccion multiple de asientos (una compra con varias entradas).
+- Resumen de compra con subtotal, servicios y total final.
+- Servicios adicionales: VIP, Seguro de cancelacion y Parqueadero.
+- Pago simulado con Strategy: Tarjeta, PSE y Nequi.
+- Comprobante en texto.
+- Panel administrador por pestanas: eventos, usuarios, recintos/zonas, asientos, compras, incidencias y metricas.
+- Graficos JavaFX en admin (BarChart y PieChart).
 
-- 3 usuarios
-- 1 administrador
-- 5 eventos
-- 2 recintos
-- zonas `VIP`, `Preferencial` y `General`
-- asientos por zona
-- 2 compras de ejemplo
-- incidencias listas para registrar desde el panel administrador
+## Credenciales de prueba
 
-## Interfaz
+- Administrador: `admin@eventosuq.com` / `admin123`
+- Usuario: `mariana@eventosuq.com` / `1234`
 
-La interfaz esta inspirada visualmente en una cartelera:
+## Requisitos funcionales (resumen)
 
-- barra superior roja con el nombre `EVENTOS UQ`
-- menu superior con `Cartelera`, `Servicios`, `Promociones` y `Admin`
-- tarjetas de eventos con colores rojo, negro, blanco y gris
-- vista de detalle para seleccionar zona y asiento
-- vista de compra con servicios, metodo de pago y comprobante
-- panel administrador con listas simples y metricas
+- RF-001 a RF-005: implementados con simulacion de usuario + flujo de consulta/seleccion.
+- RF-006 a RF-009: implementados (multi-entrada, servicios, pago, estados).
+- RF-010: implementado a nivel de servicio (filtros por evento/estado/fecha).
+- RF-011: CSV funcional (archivo temporal) y PDF simulado.
+- RF-012 a RF-019: implementacion parcial/funcional basica en servicios y vista admin.
 
-## Como ejecutar
+Detalle completo en `REVISION_REQUISITOS.md`.
 
-1. Tener instalado `JDK 17` o superior.
-2. Tener `Maven` configurado en el sistema.
-3. Desde la raiz del proyecto ejecutar:
+## Patrones implementados
 
-```bash
-mvn clean javafx:run
-```
+### Creacionales
+- Singleton: `GestorReservas`.
+- Factory Method: `EventoFactory`.
+- Builder: `ReservaBuilder`.
 
-Si prefieres compilar primero:
+### Estructurales
+- Decorator: `ServicioAdicional`, `ServicioDecorator`, `ServicioVIP`, `SeguroCancelacion`, `Parqueadero`.
+- Facade: `CompraFacade`.
+- Adapter: `ReporteExternoAdapter`.
 
-```bash
-mvn clean package
-```
+### Comportamiento
+- Strategy: `MetodoPago`, `PagoTarjeta`, `PagoPSE`, `PagoNequi`.
+- Observer: `Notificador`, `Observador`, `NotificacionUsuario`, `NotificacionAdministrador`.
+- State: `EstadoCompraInterface` + estados de compra.
 
-## Pantallas principales
+## SOLID aplicado
 
-- Recursos actuales:
-  `src/main/resources/views`
-  `src/main/resources/styles`
-- `main-view.fxml`: pantalla principal con cartelera.
-- `detalle-evento-view.fxml`: detalle del evento y seleccion de zona/asiento.
-- `compra-view.fxml`: compra, servicios, pago y comprobante.
-- `admin-view.fxml`: panel de administracion.
+- SRP: separacion entre modelos, servicios y controladores.
+- OCP: extension de servicios via Decorator y metodos de pago via Strategy.
+- LSP: `Administrador` hereda de `Usuario`.
+- ISP: interfaces pequenas (`MetodoPago`, `Reporte`, `Observador`, `ServicioAdicional`, `EstadoCompraInterface`).
+- DIP: `Pago` depende de `MetodoPago`; reportes dependen de interfaz `Reporte`.
 
-## Notas para sustentacion
+## Estructura del proyecto
 
-- No usa base de datos ni servicios externos reales.
-- Toda la informacion vive en memoria dentro de `DatosPrueba`.
-- Los pagos son simulados.
-- La navegacion se hace con JavaFX, `MainApp`, `Navigator` y controladores sencillos.
-- El objetivo fue mantener el codigo funcional, organizado y facil de explicar.
+- `src/main/java/co/edu/uniquindio/eventos/model`: entidades y enums.
+- `src/main/java/co/edu/uniquindio/eventos/service`: logica de negocio.
+- `src/main/java/co/edu/uniquindio/eventos/controller`: controladores JavaFX.
+- `src/main/java/co/edu/uniquindio/eventos/patterns`: patrones por categoria.
+- `src/main/java/co/edu/uniquindio/eventos/repository`: `DatosPrueba`.
+- `src/main/resources/views`: vistas FXML.
+- `src/main/resources/styles`: CSS.
+- `src/test/java`: pruebas unitarias JUnit 5.
 
-## Clase principal
+## Notas de sustentacion
 
-La aplicacion arranca desde:
-
-`co.edu.uniquindio.eventos.app.MainApp`
+- Se privilegio una solucion clara y mantenible para tercer semestre.
+- No se usa Spring Boot, BD real ni APIs externas.
+- Cada evento tiene mapa de asientos independiente para evitar estados compartidos.

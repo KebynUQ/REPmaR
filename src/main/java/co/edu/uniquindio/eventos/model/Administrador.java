@@ -4,7 +4,11 @@ public class Administrador extends Usuario {
     private String codigoEmpleado;
 
     public Administrador(String idUsuario, String nombreCompleto, String correo, String telefono, String codigoEmpleado) {
-        super(idUsuario, nombreCompleto, correo, telefono);
+        this(idUsuario, nombreCompleto, correo, telefono, "admin123", codigoEmpleado);
+    }
+
+    public Administrador(String idUsuario, String nombreCompleto, String correo, String telefono, String contrasena, String codigoEmpleado) {
+        super(idUsuario, nombreCompleto, correo, telefono, contrasena);
         this.codigoEmpleado = codigoEmpleado;
     }
 

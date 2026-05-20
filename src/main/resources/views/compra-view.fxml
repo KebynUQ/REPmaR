@@ -36,10 +36,20 @@
                         <CheckBox fx:id="vipCheckBox" mnemonicParsing="false" text="Servicio VIP" />
                         <CheckBox fx:id="seguroCheckBox" mnemonicParsing="false" text="Seguro de cancelacion" />
                         <CheckBox fx:id="parqueaderoCheckBox" mnemonicParsing="false" text="Parqueadero" />
+                        <CheckBox fx:id="accesoPreferencialCheckBox" mnemonicParsing="false" text="Acceso preferencial" />
+                        <CheckBox fx:id="merchandisingCheckBox" mnemonicParsing="false" text="Merchandising" />
                         <Button mnemonicParsing="false" onAction="#aplicarServicios" styleClass="secondary-button" text="Aplicar servicios" />
                         <ComboBox fx:id="metodoPagoComboBox" prefWidth="180.0" promptText="Metodo de pago" />
-                        <Label text="Total:" />
-                        <Label fx:id="totalLabel" styleClass="total-label" text="$0" />
+                        <ComboBox fx:id="promocionComboBox" prefWidth="220.0" promptText="Promocion activa" />
+                        <Button mnemonicParsing="false" onAction="#aplicarPromocion" styleClass="secondary-button" text="Aplicar promocion" />
+                        <Label text="Subtotal entradas:" />
+                        <Label fx:id="subtotalLabel" styleClass="detail-text" text="0" />
+                        <Label text="Servicios adicionales:" />
+                        <Label fx:id="serviciosLabel" styleClass="detail-text" text="0" />
+                        <Label text="Descuento promocional:" />
+                        <Label fx:id="descuentoLabel" styleClass="detail-text" text="0" />
+                        <Label text="Total final:" />
+                        <Label fx:id="totalLabel" styleClass="total-label" text="0" />
                     </children>
                     <padding>
                         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
@@ -51,6 +61,7 @@
             <children>
                 <Button mnemonicParsing="false" onAction="#pagarCompra" styleClass="primary-button" text="Pagar" />
                 <Button mnemonicParsing="false" onAction="#confirmarCompra" styleClass="primary-button" text="Confirmar compra" />
+                <Button mnemonicParsing="false" onAction="#cancelarCompra" styleClass="secondary-button" text="Cancelar compra" />
                 <Button mnemonicParsing="false" onAction="#volverDetalle" styleClass="secondary-button" text="Volver" />
             </children>
         </HBox>

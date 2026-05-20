@@ -165,3 +165,68 @@
     -fx-text-fill: #f0f0f0;
     -fx-font-size: 13px;
 }
+
+.escenario-box {
+    -fx-background-color: linear-gradient(to right, #c01f2a, #8b0f18);
+}
+
+.escenario-title {
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+
+.zona-vip {
+    -fx-background-color: #ffe8bd;
+    -fx-border-color: #d8a542;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.zona-preferencial {
+    -fx-background-color: #ffe0ec;
+    -fx-border-color: #df82aa;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.zona-general {
+    -fx-background-color: #efe4ff;
+    -fx-border-color: #9d79c9;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+}
+
+.seat-button {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-padding: 5px;
+}
+
+.seat-available {
+    -fx-background-color: #f7f7f7;
+    -fx-border-color: #bbbbbb;
+    -fx-text-fill: #222222;
+}
+
+.seat-reservado {
+    -fx-background-color: #cdcdcd;
+    -fx-text-fill: #4a4a4a;
+}
+
+.seat-vendido {
+    -fx-background-color: #d9534f;
+    -fx-text-fill: white;
+}
+
+.seat-bloqueado {
+    -fx-background-color: #8b8b8b;
+    -fx-text-fill: white;
+}
+
+.seat-seleccionado {
+    -fx-background-color: #1f8d4f;
+    -fx-text-fill: white;
+    -fx-border-color: #0f5b30;
+}

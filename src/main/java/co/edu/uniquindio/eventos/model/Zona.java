@@ -38,6 +38,12 @@ public class Zona {
         this.precioBase = nuevoPrecio;
     }
 
+    public void actualizarDatos(String nombre, int capacidad, double precioBase) {
+        this.nombre = nombre;
+        this.capacidad = capacidad;
+        this.precioBase = precioBase;
+    }
+
     public List<Asiento> consultarAsientosDisponibles() {
         return asientos.stream()
                 .filter(asiento -> asiento.getEstado() == EstadoAsiento.DISPONIBLE)

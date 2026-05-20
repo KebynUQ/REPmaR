@@ -11,14 +11,20 @@ public class Usuario {
     private String nombreCompleto;
     private String correo;
     private String telefono;
+    private String contrasena;
     private List<MetodoPago> metodosPago;
     private List<Compra> compras;
 
     public Usuario(String idUsuario, String nombreCompleto, String correo, String telefono) {
+        this(idUsuario, nombreCompleto, correo, telefono, "1234");
+    }
+
+    public Usuario(String idUsuario, String nombreCompleto, String correo, String telefono, String contrasena) {
         this.idUsuario = idUsuario;
         this.nombreCompleto = nombreCompleto;
         this.correo = correo;
         this.telefono = telefono;
+        this.contrasena = contrasena;
         this.metodosPago = new ArrayList<>();
         this.compras = new ArrayList<>();
     }
@@ -32,6 +38,12 @@ public class Usuario {
     }
 
     public void actualizarPerfil(String nuevoTelefono) {
+        this.telefono = nuevoTelefono;
+    }
+
+    public void actualizarPerfil(String nuevoNombre, String nuevoCorreo, String nuevoTelefono) {
+        this.nombreCompleto = nuevoNombre;
+        this.correo = nuevoCorreo;
         this.telefono = nuevoTelefono;
     }
 
@@ -77,6 +89,14 @@ public class Usuario {
 
     public List<Compra> getCompras() {
         return compras;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     @Override
