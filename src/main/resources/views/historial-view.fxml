@@ -5,7 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
@@ -23,11 +24,19 @@
                 <Button mnemonicParsing="false" onAction="#limpiarFiltros" styleClass="secondary-button" text="Limpiar" />
             </children>
         </HBox>
-        <ListView fx:id="comprasListView" prefHeight="220.0" />
+        <TableView fx:id="comprasTableView" prefHeight="240.0">
+            <columns>
+                <TableColumn fx:id="eventoColumn" prefWidth="210.0" text="Evento" />
+                <TableColumn fx:id="fechaColumn" prefWidth="190.0" text="Fecha" />
+                <TableColumn fx:id="estadoColumn" prefWidth="110.0" text="Estado" />
+                <TableColumn fx:id="entradasColumn" prefWidth="100.0" text="Entradas" />
+                <TableColumn fx:id="totalColumn" prefWidth="120.0" text="Total" />
+            </columns>
+        </TableView>
         <TextArea fx:id="detalleArea" editable="false" prefHeight="140.0" promptText="Detalle de compra seleccionada." wrapText="true" />
         <HBox spacing="10.0">
             <children>
-                <Button mnemonicParsing="false" onAction="#verDetalle" styleClass="secondary-button" text="Ver detalle" />
+                <Button mnemonicParsing="false" onAction="#verDetalle" styleClass="secondary-button" text="Ver comprobante" />
                 <Button mnemonicParsing="false" onAction="#descargarCsv" styleClass="primary-button" text="Descargar CSV" />
                 <Button mnemonicParsing="false" onAction="#generarPdfSimulado" styleClass="primary-button" text="Generar PDF" />
                 <Button mnemonicParsing="false" onAction="#volverCartelera" styleClass="secondary-button" text="Volver" />

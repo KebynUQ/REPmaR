@@ -11,10 +11,12 @@ public class PanelMetricas {
     private int cantidadEventosPublicados;
     private Map<String, Double> ocupacionPorZona;
     private Map<String, Double> ventasPorEvento;
+    private Map<String, Double> ventasPorPeriodo;
 
     public PanelMetricas() {
         this.ocupacionPorZona = new LinkedHashMap<>();
         this.ventasPorEvento = new LinkedHashMap<>();
+        this.ventasPorPeriodo = new LinkedHashMap<>();
     }
 
     public double getTotalVentas() {
@@ -63,5 +65,9 @@ public class PanelMetricas {
 
     public Map<String, Double> getVentasPorEvento() {
         return ventasPorEvento;
+    }
+
+    public Map<String, Double> getVentasPorPeriodo() {
+        return ventasPorPeriodo;
     }
 }

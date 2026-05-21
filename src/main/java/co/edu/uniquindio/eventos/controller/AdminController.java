@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
@@ -96,11 +97,17 @@ public class AdminController {
     @FXML
     private Label comprasLabel;
     @FXML
+    private Label ingresosServiciosLabel;
+    @FXML
     private Label publicadosLabel;
+    @FXML
+    private Label tasaCancelacionLabel;
     @FXML
     private Label ocupacionLabel;
     @FXML
     private BarChart<String, Number> ventasBarChart;
+    @FXML
+    private LineChart<String, Number> ventasLineChart;
     @FXML
     private PieChart ocupacionPieChart;
 
@@ -467,11 +474,11 @@ public class AdminController {
 
     private void actualizarMetricas() {
         PanelMetricas metricas = MainApp.getInstancia().getAdminService().obtenerMetricasBasicas();
-        totalVentasLabel.setText("Total ventas: $" + String.format("%.0f", metricas.getTotalVentas())
-                + " | Ingresos servicios: $" + String.format("%.0f", metricas.getIngresosServicios()));
-        comprasLabel.setText("Compras registradas: " + metricas.getCantidadCompras());
-        publicadosLabel.setText("Eventos publicados: " + metricas.getCantidadEventosPublicados()
-                + " | Tasa cancelacion: " + String.format("%.0f%%", metricas.getTasaCancelacion()));
+        totalVentasLabel.setText("$" + String.format("%.0f", metricas.getTotalVentas()));
+        comprasLabel.setText(String.valueOf(metricas.getCantidadCompras()));
+        ingresosServiciosLabel.setText("$" + String.format("%.0f", metricas.getIngresosServicios()));
+        publicadosLabel.setText(String.valueOf(metricas.getCantidadEventosPublicados()));
+        tasaCancelacionLabel.setText(String.format("%.0f%%", metricas.getTasaCancelacion()));
         StringBuilder ocupacion = new StringBuilder("Ocupacion por zona:\n");
         metricas.getOcupacionPorZona().forEach((nombre, valor) ->
                 ocupacion.append(nombre).append(": ").append(String.format("%.0f%%", valor)).append("\n"));
@@ -482,6 +489,12 @@ public class AdminController {
         metricas.getVentasPorEvento().forEach((evento, venta) ->
                 serieVentas.getData().add(new XYChart.Data<>(evento, venta)));
         ventasBarChart.getData().setAll(serieVentas);
+
+        XYChart.Series<String, Number> seriePeriodo = new XYChart.Series<>();
+        seriePeriodo.setName("Ventas por periodo");
+        metricas.getVentasPorPeriodo().forEach((periodo, venta) ->
+                seriePeriodo.getData().add(new XYChart.Data<>(periodo, venta)));
+        ventasLineChart.getData().setAll(seriePeriodo);
 
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
         metricas.getOcupacionPorZona().forEach((zona, valor) -> pieData.add(new PieChart.Data(zona, valor)));

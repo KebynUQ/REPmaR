@@ -15,6 +15,7 @@ import co.edu.uniquindio.eventos.repository.DatosPrueba;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class AdminService {
     public List<Evento> obtenerEventos() {
@@ -101,6 +102,14 @@ public class AdminService {
                 .entrySet().stream()
                 .sorted(java.util.Map.Entry.<String, Double>comparingByValue(Comparator.reverseOrder()))
                 .forEach(entry -> panel.getVentasPorEvento().put(entry.getKey(), entry.getValue()));
+
+        compras.stream()
+                .collect(Collectors.groupingBy(
+                        compra -> compra.getFechaCreacion().toLocalDate().toString(),
+                        Collectors.summingDouble(Compra::getTotal)))
+                .entrySet().stream()
+                .sorted(java.util.Map.Entry.comparingByKey())
+                .forEach(entry -> panel.getVentasPorPeriodo().put(entry.getKey(), entry.getValue()));
 
         for (Evento evento : obtenerEventos()) {
             for (Zona zona : evento.getRecinto().getZonas()) {

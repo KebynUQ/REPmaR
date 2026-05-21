@@ -88,13 +88,33 @@ public class Compra {
 
     public String generarComprobante() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Compra ").append(idCompra)
+        builder.append("COMPROBANTE DE COMPRA")
+                .append("\nCompra: ").append(idCompra)
                 .append("\nUsuario: ").append(usuario.getNombreCompleto())
+                .append("\nCorreo: ").append(usuario.getCorreo())
                 .append("\nEvento: ").append(evento.getNombre())
+                .append("\nFecha compra: ").append(fechaCreacion)
                 .append("\nEstado: ").append(estado)
+                .append("\nEntradas:");
+        for (Entrada entrada : entradas) {
+            builder.append("\n- ").append(entrada.getZona().getNombre())
+                    .append(" / Asiento ").append(entrada.getAsiento().getEtiqueta())
+                    .append(" / $").append(String.format("%.0f", entrada.getPrecioFinal()));
+        }
+        if (servicios.isEmpty()) {
+            builder.append("\nServicios: Sin adicionales");
+        } else {
+            builder.append("\nServicios:");
+            for (ServicioAdicional servicio : servicios) {
+                builder.append("\n- ").append(servicio.getNombre())
+                        .append(" ($").append(String.format("%.0f", servicio.getCosto())).append(")");
+            }
+        }
+        builder.append("\nDescuento promocional: -$").append(String.format("%.0f", descuentoPromocional))
                 .append("\nTotal: $").append(String.format("%.0f", total));
         if (pago != null) {
-            builder.append("\n").append(pago.generarComprobante());
+            builder.append("\nMetodo de pago: ").append(pago.getMetodoPago().getNombre())
+                    .append("\n").append(pago.generarComprobante());
         }
         return builder.toString();
     }

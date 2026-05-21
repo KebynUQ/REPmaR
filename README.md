@@ -29,6 +29,7 @@ Nota: en este entorno no estuvo disponible el comando `mvn`, por lo tanto la ver
 - Login y registro en memoria (sin base de datos) con sesion por rol.
 - Mi perfil (ver y editar nombre, correo y telefono).
 - Historial de compras con filtros por evento/estado/fecha.
+- Historial con consulta de comprobantes (boton `Ver comprobante`).
 - Detalle de evento con mapa visual de zonas y asientos.
 - Seleccion multiple de asientos (una compra con varias entradas).
 - Resumen de compra con subtotal, servicios y total final.
@@ -37,6 +38,8 @@ Nota: en este entorno no estuvo disponible el comando `mvn`, por lo tanto la ver
 - Comprobante en texto.
 - Panel administrador por pestanas: eventos, usuarios, recintos/zonas, asientos, compras, incidencias y metricas.
 - Graficos JavaFX en admin (BarChart y PieChart).
+- Graficos JavaFX en admin: BarChart (ventas por evento), PieChart (ocupacion por zona) y LineChart (ventas por periodo).
+- Reportes de usuario: CSV real y PDF simulado con archivo generado.
 
 ## Credenciales de prueba
 

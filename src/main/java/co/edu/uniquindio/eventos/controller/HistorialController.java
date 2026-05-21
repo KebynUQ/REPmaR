@@ -9,12 +9,15 @@ import co.edu.uniquindio.eventos.patterns.structural.ReporteCSV;
 import co.edu.uniquindio.eventos.patterns.structural.ReportePDF;
 import co.edu.uniquindio.eventos.util.AlertUtil;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.util.List;
 
@@ -26,7 +29,17 @@ public class HistorialController {
     @FXML
     private DatePicker fechaFiltroDatePicker;
     @FXML
-    private ListView<Compra> comprasListView;
+    private TableView<Compra> comprasTableView;
+    @FXML
+    private TableColumn<Compra, String> eventoColumn;
+    @FXML
+    private TableColumn<Compra, String> fechaColumn;
+    @FXML
+    private TableColumn<Compra, String> estadoColumn;
+    @FXML
+    private TableColumn<Compra, String> entradasColumn;
+    @FXML
+    private TableColumn<Compra, String> totalColumn;
     @FXML
     private TextArea detalleArea;
 
@@ -35,6 +48,11 @@ public class HistorialController {
     public void cargarUsuario(Usuario usuario) {
         this.usuarioActual = usuario;
         estadoFiltroComboBox.setItems(FXCollections.observableArrayList(EstadoCompra.values()));
+        eventoColumn.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getEvento().getNombre()));
+        fechaColumn.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getFechaCreacion().toString()));
+        estadoColumn.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getEstado().name()));
+        entradasColumn.setCellValueFactory(c -> new SimpleStringProperty(String.valueOf(c.getValue().getEntradas().size())));
+        totalColumn.setCellValueFactory(c -> new SimpleStringProperty("$" + String.format("%.0f", c.getValue().getTotal())));
         cargarCompras(usuario.getCompras());
     }
 
@@ -59,7 +77,7 @@ public class HistorialController {
 
     @FXML
     public void verDetalle() {
-        Compra compra = comprasListView.getSelectionModel().getSelectedItem();
+        Compra compra = comprasTableView.getSelectionModel().getSelectedItem();
         if (compra == null) {
             AlertUtil.mostrarInfo("Historial", "Selecciona una compra para ver detalle.");
             return;
@@ -87,6 +105,7 @@ public class HistorialController {
     }
 
     private void cargarCompras(List<Compra> compras) {
-        comprasListView.setItems(FXCollections.observableArrayList(compras));
+        ObservableList<Compra> items = FXCollections.observableArrayList(compras);
+        comprasTableView.setItems(items);
     }
 }

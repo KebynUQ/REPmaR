@@ -11,7 +11,7 @@
 - RF-008: Cumplido
 - RF-009: Cumplido
 - RF-010: Cumplido
-- RF-011: Parcial
+- RF-011: Cumplido
 
 ## Requisitos del Administrador
 - RF-012: Cumplido
@@ -66,7 +66,7 @@ Pantallas implementadas:
 
 ## Reportes
 - CSV: funcional, genera archivo temporal con historial de compras del usuario (`ReporteCSV`).
-- PDF: simulado (`ReportePDF`).
+- PDF: simulado pero funcional, genera archivo `.txt` tipo reporte PDF (`ReportePDF`).
 - Adapter externo: implementado (`ReporteExternoAdapter`).
 
 ## Tests
@@ -88,6 +88,7 @@ Existen pruebas unitarias para:
 - RF-006: boton de cancelar compra antes de pago en `CompraController`/`compra-view.fxml`.
 - Metricas extendidas (`ingresosServicios`, `tasaCancelacion`, `ventasPorEvento`) en `PanelMetricas`/`AdminService`.
 - Visualizacion de metricas con `BarChart` y `PieChart` en Admin.
+- Visualizacion de metricas completada con `BarChart`, `PieChart` y `LineChart`.
 - CSV funcional en `ReporteCSV`.
 - README actualizado.
 - Flujo inicial corregido: la app inicia en login, permite registro y maneja sesion por rol.
